@@ -1,20 +1,22 @@
+require_relative 'frame'
+
 class BowlingGame
 
   def initialize(line)
-    @line = line
+    @line_frames = line
   end
 
   def points
     result = 0
-    @line.chars.to_a.each_index do | index |
-      if @line[index] == '-'
+    @line_frames.chars.to_a.each_index do | index |
+      if @line_frames[index] == '-'
         result += 0
-      elsif @line[index] == '/'
-        result += 10 + @line[index + 1].ord - 48
-      elsif @line[index] == 'X'
-        result += 10 + @line[index + 1].ord - 48 + @line[index + 2].ord - 48
+      elsif @line_frames[index] == '/'
+        result += 10 + @line_frames[index + 1].ord - 48
+      elsif @line_frames[index] == 'X'
+        result += 10 + @line_frames[index + 1].ord - 48 + @line_frames[index + 2].ord - 48
       else
-        result += @line[index].ord - 48
+        result += @line_frames[index].ord - 48
       end
     end
     result
