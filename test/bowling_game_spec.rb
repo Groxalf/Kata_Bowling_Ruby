@@ -2,11 +2,13 @@ require 'rspec'
 
 def points(line)
   result = 0
-  line.each_char do | char |
-    if char == '-'
+  line.chars.to_a.each_index do | index |
+    if line[index] == '-'
       result += 0
+    elsif line[index] == '/'
+      result += 10 + line[index + 1].ord - 48
     else
-      result += char.ord - 48
+      result += line[index].ord - 48
     end
   end
   result
@@ -24,5 +26,9 @@ describe 'BowlingGameShould' do
 
   it 'should return 4 points when in the bowling line is more than one drawn bowl' do
     expect(points('1---3----------------')).to(eq(4))
+  end
+
+  it 'should add the next throw when the previous is an spare' do
+    expect(points('1---/4---------------')).to(eq(19))
   end
 end
