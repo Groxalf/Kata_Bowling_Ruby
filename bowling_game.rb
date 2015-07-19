@@ -10,14 +10,26 @@ class BowlingGame
       if @line_frames[index] == '-'
         result += 0
       elsif @line_frames[index] == '/'
-        result += 10 + @line_frames[index + 1].ord - 48
+        result += field_value(index) + field_value(index + 1)
       elsif @line_frames[index] == 'X'
-        result += 10 + @line_frames[index + 1].ord - 48 + @line_frames[index + 2].ord - 48
+        result += field_value(index) + field_value(index + 1) + field_value(index + 2)
       else
-        result += @line_frames[index].ord - 48
+        result += field_value(index)
       end
     end
     result
+  end
+
+  def field_value(index)
+    if @line_frames[index] == '-'
+       0
+    elsif @line_frames[index] == '/'
+       10 - field_value(index - 1)
+    elsif   @line_frames[index] == 'X'
+       10
+    else
+       @line_frames[index].ord - 48
+    end
   end
 
 end

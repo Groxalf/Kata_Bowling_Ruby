@@ -27,4 +27,8 @@ describe 'BowlingGameShould' do
   it 'should add the next two throws when the previous is an strike' do
     expect(points('X45-----------------')).to(eq(28))
   end
+
+  it 'should add a spare and a spare when one follows the other' do
+    expect(points('4/X45---------------')).to(eq(48))
+  end
 end
