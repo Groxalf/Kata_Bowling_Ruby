@@ -17,18 +17,14 @@ describe 'BowlingGameShould' do
   end
 
   it 'should return 4 points when in the bowling line is more than one drawn bowl' do
-    expect(points('1---3----------------')).to(eq(4))
+    expect(points('13-------------------')).to(eq(4))
   end
 
   it 'should add the next throw when the previous is an spare' do
-    expect(points('1---/4---------------')).to(eq(19))
+    expect(points('4/4------------------')).to(eq(14))
   end
 
   it 'should add the next two throws when the previous is an strike' do
-    expect(points('1---X45-------------')).to(eq(29))
-  end
-
-  it 'should add two strikes when one follows the other' do
-    expect(points('1---XX45-----------')).to(eq(29))
+    expect(points('X45-----------------')).to(eq(28))
   end
 end
