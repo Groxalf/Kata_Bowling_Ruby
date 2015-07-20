@@ -29,6 +29,9 @@ class BowlingGame
         FieldPointValue.get_value(@line_frames[index - 1][2]) if index == MAX_FRAMES
 
     return FieldPointValue.get_value(@line_frames[index][0]) +
+        FieldPointValue.get_value(@line_frames[index][1]) if index + 1 == MAX_FRAMES
+
+    return FieldPointValue.get_value(@line_frames[index][0]) +
         FieldPointValue.get_value(@line_frames[index + 1][0]) if @line_frames[index][0].eql? 'X'
 
     FieldPointValue.get_value(@line_frames[index][0]) + FieldPointValue.get_value(@line_frames[index][1])
