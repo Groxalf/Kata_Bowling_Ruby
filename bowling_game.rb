@@ -21,9 +21,13 @@ class BowlingGame
   end
 
   def calculate_strike(index)
-    first_roll = @line_frames[index + 1][0]
-    second_roll = @line_frames[index + 1][1]
-    FieldPointValue.get_value('X') + FieldPointValue.get_value(first_roll) + FieldPointValue.get_value(second_roll)
+    FieldPointValue.get_value('X') + calculate_strike_bonus(index + 1)
+  end
+
+  def calculate_strike_bonus(index)
+    return FieldPointValue.get_value(@line_frames[index][0]) +
+        FieldPointValue.get_value(@line_frames[index + 1][0]) if @line_frames[index][0].eql? 'X'
+    FieldPointValue.get_value(@line_frames[index][0]) + FieldPointValue.get_value(@line_frames[index][1])
   end
 
   def is_a_strike(frame)
@@ -35,8 +39,13 @@ class BowlingGame
   end
 
   def calculate_spare(index)
-    first_roll = @line_frames[index + 1][0]
-    FieldPointValue.get_value('/') + FieldPointValue.get_value(first_roll)
+    FieldPointValue.get_value('/') + calculate_spare_bonus(index)
+  end
+
+  def calculate_spare_bonus(index)
+    (index == MAX_FRAMES - 1) ?
+        FieldPointValue.get_value(@line_frames[index][2]) :
+        FieldPointValue.get_value(@line_frames[index + 1][0])
   end
 
 end
