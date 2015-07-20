@@ -52,9 +52,12 @@ describe 'BowlingGameShould' do
     expect(points('11 11 11 11 11 11 11 11 11 XXX')).to(eq(48))
   end
 
-
-
   it 'should add a full strikes line' do
     expect(points('X X X X X X X X X XXX')).to(eq(300))
+  end
+
+  it 'should add a full strikes line' do
+    pending
+    expect(points('X X X X X X X X X 1/X')).to(eq(271))
   end
 end
