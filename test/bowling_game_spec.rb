@@ -43,4 +43,11 @@ describe 'BowlingGameShould' do
   it 'should add to a spare the last roll' do
     expect(points('11 11 11 11 11 11 11 11 11 1/4')).to(eq(32))
   end
+  it 'should add to a spare the last roll' do
+    expect(points('11 11 11 11 11 11 11 11 11 1/4')).to(eq(32))
+  end
+
+  it 'should add the last two strikes to the score' do
+    expect(points('11 11 11 11 11 11 11 11 11 XXX')).to(eq(48))
+  end
 end

@@ -25,8 +25,12 @@ class BowlingGame
   end
 
   def calculate_strike_bonus(index)
+    return FieldPointValue.get_value(@line_frames[index - 1][1]) +
+        FieldPointValue.get_value(@line_frames[index - 1][2]) if index == MAX_FRAMES
+
     return FieldPointValue.get_value(@line_frames[index][0]) +
         FieldPointValue.get_value(@line_frames[index + 1][0]) if @line_frames[index][0].eql? 'X'
+
     FieldPointValue.get_value(@line_frames[index][0]) + FieldPointValue.get_value(@line_frames[index][1])
   end
 
