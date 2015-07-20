@@ -1,8 +1,7 @@
+require_relative 'field_point_value'
+
 class BowlingGame
 
-  HYPHEN_VALUE = 0
-  SPARE_VALUE = 10
-  STRIKE_VALUE = 10
   MAX_FRAMES = 10
 
   def initialize(line)
@@ -18,13 +17,13 @@ class BowlingGame
   def calculate_frame_points(frame, index)
     return calculate_spare(index) if is_a_spare(frame)
     return calculate_strike(index) if is_a_strike(frame)
-    field_value(frame[0]) + field_value(frame[1])
+    FieldPointValue.get_value(frame[0]) + FieldPointValue.get_value(frame[1])
   end
 
   def calculate_strike(index)
     first_roll = @line_frames[index + 1][0]
     second_roll = @line_frames[index + 1][1]
-    STRIKE_VALUE + field_value(first_roll) + field_value(second_roll)
+    FieldPointValue.get_value('X') + FieldPointValue.get_value(first_roll) + FieldPointValue.get_value(second_roll)
   end
 
   def is_a_strike(frame)
@@ -37,19 +36,7 @@ class BowlingGame
 
   def calculate_spare(index)
     first_roll = @line_frames[index + 1][0]
-    SPARE_VALUE + field_value(first_roll)
-  end
-
-  def field_value(field_value)
-    if field_value == '-'
-      HYPHEN_VALUE
-    elsif field_value == '/'
-      SPARE_VALUE
-    elsif field_value === 'X'
-      STRIKE_VALUE
-    else
-      field_value.ord - 48
-    end
+    FieldPointValue.get_value('/') + FieldPointValue.get_value(first_roll)
   end
 
 end
