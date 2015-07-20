@@ -40,7 +40,7 @@ describe 'BowlingGameShould' do
     expect(points('45 X X 45 -- -- -- -- -- ---')).to(eq(61))
   end
 
-  it 'should add a two strikes when one follows the other' do
+  it 'should add to a spare the last roll' do
     expect(points('11 11 11 11 11 11 11 11 11 1/4')).to(eq(32))
   end
 end
